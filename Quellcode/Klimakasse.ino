@@ -19,37 +19,6 @@ Definition der CO2 Referenzwerte.
 
 bool mainpage = false; //Speichert ob sich das Programm im Scanmodus befindet.
 
-class EString {
-  public:
-    EString(char data[]) {
-      content = new char[sizeof(data)];
-      length = sizeof(data);
-      Serial.println("Creating E-String with length: ");
-      Serial.println((int)length);
-      Serial.println(data);
-      for(char i = 0; i<length; i++) {
-        content[i] = data[i];
-      }
-    }
-    bool matches(const char data[]) {
-      for(char i = 0; i<sizeof(data); i++){
-        if(i>=length || content[i] != data[i]) {
-          return false;
-        }
-      }
-      return true;
-    }
-    void print() {
-      Serial.print("Printing ");
-      Serial.println((int)length);
-      for(char i = 0; i<length; i++) {
-        Serial.print(content[i]);
-      }
-    }
-    char * content;
-    char length;
-};
-
 /**
 Diese Klasse umfasst die Informationen für ein Modell das gescannt werden kann.
 Es wird ein Schlüssel, der anzuzeigende Text, die ID des NFC Chips und der CO2 Wert in Gramm pro Jahr übergeben.
