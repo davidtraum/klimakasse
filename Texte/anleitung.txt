@@ -1,0 +1,144 @@
+Checkliste
+Zeitaufwand: 5-6 Stunden aktiv, ca. 40 Stunden 3D-Druck
+Kosten: ca. 200 Euro
+Programmieren: Grundlegende C++ Kenntnisse
+Elektronik: Grundkenntnisse, kein Löten erforderlich
+
+Material:
+- Arduino Board mit SPI und Serieller Schnittstelle (hier wurde das ESP8266 Board „NodeMCU“ verwendet)
+- Nextion Touchscreen, am besten mit Gehäuse. Hier wurde auf die 7“ Version zurückgegriffen
+- MFRC522 RFID Reader
+- Piezo-Buzzer
+- 3D Drucker mit mindestens 15x15cm Grundfläche
+- Idealerweise vier verschiedenfarbige 3D-Druck Filamente
+- Jumper Kabel
+- Ein wenig dünnes Pressholz und ein Scharnier für das Gehäuse
+- Stichsäge
+- Heißklebepistole
+- 18x 3mm Gehäuseschrauben mit Muttern
+- Optional: Nietenzange mit 16x 3mm Nieten, ansonsten 16 weitere (kurze) 3mm Schrauben
+- Breadboard mit mindestens 20 Reihen
+- 2x 12cm PVC Rohr (20mm Durchmesser). Kann alternativ auch 3D-gedruckt werden.
+- 30 NFC Sticker (z.B. NTag216)
+
+Einleitung:
+Die „Klimakasse“ ermöglicht auf eine spielerische Art und Weise den eigenen jährlichen CO2-Fußabdruck abzuschätzen. Sie wird auf öffentlichen Infoständen als anschauliches und interaktives Medium genutzt.
+Interessenten können so innerhalb weniger Minuten einfach und intuitiv ein grobes Gefühl dafür bekommen, wie viel die einzelnen Bereiche Konsum, Mobilität, Ernährung und Energie zum eigenen CO2-Fußabdruck beitragen.
+Zur Kasse gehören eine Reihe von 3D-gedruckten Modellen, welche verschiedene Lebensbereiche und Konsumgewohnheiten repräsentieren. Ein Windrad steht für den Gebrauch von Ökostrom, während ein Kraftwerk für den Gebrauch von konventioneller Energie steht. Ein Kreuzfahrtschiff steht für eine zweiwöchige Kreuzfahrt im Jahr und ein großes Handy für hohe Ausgaben im Bereich der Unterhaltungselektronik.
+Ein Teilnehmer wählt die auf ihn zutreffenden Modelle und zieht sie über den verbauten NFC-Scanner.
+Die gescannten Modelle werden auf dem Bildschirm mit ihrem „Preis“, also dem jeweiligen jährlichen CO2-Ausstoß, aufgelistet, ähnlich wie auf einem Kassenbon. Auf einer Skala erfolgt währenddessen eine grafische Gegenüberstellung des ermittelten Gesamtwertes mit den deutschen Durchschnittswerten und dem optimalen Wert für ein gesundes Weltklima.
+Darunter wird eine lachende Erde dargestellt, welche bei einem überdurchschnittlichen CO-2 Ausstoß zunehmend trauriger dreinblickt.
+Wenn ein Teilnehmer alle seine Modelle gescannt hat, erhält er eine Zusammen­rechnung aller Werte und eine Abschätzung, wie viele Planeten Erde man bräuchte, wenn jeder Mensch einen ähnlichen Lebensstil führen würde. Das Ergebnis können die Veranstalter als Ausgangspunkt für Diskussionen und Tipps rund um die Senkung des eigenen CO2-Ausstoßes nehmen.
+
+
+Schritt 1: Bau des Gehäuses
+Das Gehäuse der Kasse besteht hauptsächlich aus zwei Teilen: Dem unteren Teil, in welchem sich der Microcontroller und der Scanner befinden, und dem oberen Teil, welcher das Display hält und über ein Scharnier mit dem unteren Teil verbunden ist.
+Der untere Teil ist wie eine Kiste aufgebaut, während der obere Teil nur aus einer Holzplatte mit dem eingelassenen Display besteht.
+Für unteren Teil müssen zuerst die passenden Seitenteile und der Boden ausgesägt werden. Dazu werden folgende Größen benötigt:
+- Bodenplatte: 22cm x 20cm
+- Seitenwände: 20cm x 6cm (2x)
+- Vorder- und Rückwand: 22cm x 6cm (2x)
+Die Vorder-und Rückwand sind zuerst identisch, in eine der Platten müssen nun allerdings zwei Löcher mit je 10mm Durchmesser gebohrt werden. Eins davon sollte unten links in der Ecke sein und das andere in der oberen rechten Ecke, jeweils mit 10mm Abstand vom Rand. Durch diese Löcher werden später das USB-Kabel und die Kabel des Displays in das Gehäuse geführt.
+Die Bodenplatte wird anschließend durch Eckwinkel mit den Wänden verbunden. Die Winkel sind im Baumarkt erhältlich, allerdings gibt es auch zahlreiche frei zugängliche 3D-Vorlagen im Internet die alternativ ausgedruckt werden können. 
+Am einfachsten ist es, die Winkel durch Nieten mit den Brettern zu verbinden, aber es können auch Gehäuseschrauben verwendet werden. Diese müssen eventuell gekürzt werden falls der Platz nicht reicht.
+Für den Deckel des Gehäuses muss eine weitere Platte in der Größe der Bodenplatte ausgesägt werden. Daraufhin wird der MFRC522 RFID Reader mittig auf der Platte platziert und die Position der Pinleiste aufgezeichnet. An der Stelle der Pinleiste wird danach ein 3mm breiter Schlitz gesägt. Ist dies geschehen, kann die Deckelplatte optional für ein besseres Aussehen schwarz lackiert oder mit einer Folie beklebt werden.
+Damit die Deckelplatte stabil aufliegt, werden an den oberen Rändern der Wände noch Winkel angebracht, welche nach innen zeigen und den Deckel stützen. Hier kann alternativ auch wieder eine von hunderten Druckvorlagen für einen Winkel aus dem Internet genutzt werden.
+Der untere Teil des Gehäuses ist nun so gut wie fertig.
+Als nächstes wird eine Holzplatte aus dem dickeren Holz (mindestens 10mm) ausgesägt. Diese sollte die gleichen Abmessungen wie die Grundfläche der Kasse haben (22cm x 20cm) und dient als Halterung für das Nextion Display. Wenn ein Display ohne Gehäuse genutzt wird, kann dieses später auf die Holzplatte geschraubt werden. Für ein Display mit Gehäuse sollte jetzt ein Ausschnitt mit der Größe des hinteren Teils des Displaygehäuses in die Holzplatte gesägt werden, damit das Display später eingelassen werden kann. Die Verwendung eines Displays mit Gehäuse hat ausschließlich optische Vorteile. 
+Das Display sollte nicht mittig auf der Platte platziert werden, sondern an der oberen Kante, da unten etwas Platz für die Befestigung der Stützen und des Scharniers benötigt wird.
+Sowohl die Stützen als auch das Scharnier werden auf der Rückseite der Displayplatte befestigt. Die Halterung für die Stützen liegt als 3D-Modell vor und kann gedruckt werden. Sie wird zweimal benötigt und wird rechts und links außen auf der Rückseite der Display-Platte mit jeweils zwei 3mm Schrauben befestigt.
+Für die Stützen selbst werden zwei 12cm lange Rohre verwendet. Am einfachsten lassen sich hier Stücke aus einem PVC-Rohr aussägen, allerdings können die Rohre auch 3D-gedruckt werden. Diese werden beim späteren Aufstellen der Kasse in die Halterungen gesteckt.
+Um nun den oberen Teil mit dem unteren Teil zu verbinden wird ein Scharnier verwendet. So kann die Kasse später zusammengefaltet werden. Das Scharnier wird auf der Rückseite der Displayhalterung und auf der Außenseite der Rückwand des unteren Gehäuses mit 2-4 3mm Schrauben befestigt. 
+
+Schritt 2: Druck der Modelle
+Für die vollständige Funktionalität der Kasse sollten alle Modelle die auf den Unterlagen aufgedruckt sind mit einem 3D-Drucker gedruckt werden. Zu allen Kategorien findet man oft mehrere gute Modelle unter der Creative Commons Lizenz im Internet, zum Beispiel bei Thingiverse. Die Schwierigkeit besteht darin, die RFID Chips richtig in die Modelle zu integrieren. Man sollte immer ein Modell wählen, welches eine flache Grundfläche hat die mindestens so groß ist wie einer der RFID-Aufkleber. Da die Objekte in vier Kategorien unterteilt sind bietet sich die Verwendung von vier verschiedenen Filamentfarben an. In diesem Fall wurden Weiß, Rot, Blau und Gelb verwendet. 
+Wenn man ein passendes Modell heruntergeladen hat, kann man dieses mit einer Slicer-Software für den 3D-Druck vorbereiten. Hier wurde die Software Cura verwendet. Man sollte bei den Modellen so wenig Infill wie möglich wählen (10-20%), da es hier nicht auf erhöhte Stabilität ankommt und so viel Material gespart wird. Als Filament ist PLA völlig außreichend. Je nach Detailreichtum des Modells wurde eine Layerhöhe von 0,2 - 0,3mm gewählt.
+Um den RFID-Aufkleber in das Modell zu integrieren, sollte man warten bis die ersten 1-2 Layer gedruckt wurden und den Druck draufhin pausieren. Nun kann man den Aufkleber möglichst mittig auf die gedruckten Layer kleben und den Druck anschließend fortsetzen. Mehr als zwei Layer sollte man nicht abwarten, da sonst die Reichweite des RFID-Scanners stark abnimmt. 
+Wenn der Drucker beim folgenden Layer auf dem Aufkleber nicht ganz korrekt druckt beeinflusst das das Aussehen des fertigen Modells nicht.
+Die Modelle können anschließend auf den passenden, als PDF vorliegenden, Unterlagen ausgestellt werden.
+Auf die Vorderseite des Gehäuses kann zusätzlich ein 3D-gedruckter Schriftzug geklebt werden. Dazu kann der Schriftzug als PNG-Bild mit Cura geöffnet werden. Dort kann dann eingestellt werden, wie dick die Schriftzeichen sein sollen. In diesem Fall wurde der Schriftzug mit 1mm Dicke gedruckt und anschließend mit Flüssigkleber auf die Vorderseite der Kasse geklebt.
+
+
+Schritt 3: Das Display-Interface
+Für die Gestaltung des Interfaces für das Nextion Display kann die Software „Nextion Studio“ genutzt werden, welche leider nur für Windows verfügbar ist. Dort können Knöpfe und andere GUI-Elemente in einer grafischen Oberfläche positioniert werden. Es gibt außerdem eine sehr minimalistische Skriptsprache mit der man kleine Berechnungen und Animationen umsetzen kann.
+Für die Darstellung der Liste mit den gescannten Objekten wurde eine Liste von 16 Textfeldern mit transparentem Hintergrund eingefügt. Die ID, welche jedes Element der Oberfläche haben muss, ist bei den Textfeldern aufsteigend nummeriert. So kann der Microcontroller die Felder gezielt ansprechen.
+Bei der Verwendung der Buttons ist wichtig, dass die Option „Send ID“ im Skriptfenster aktiviert ist, da das Display sonst nicht an den Microcontroller sendet das der Knopf gedrückt wurde.
+Anschließend muss die Oberfläche über die serielle Schnittstelle auf das Display geladen werden. Wenn man keinen USB auf Serial Converter zur Hand hat kann man dafür auch einen Arduino benutzen. Dazu muss man nur den Reset Pin des Arduinos mit einem Ground Pin verbinden und das Display an die Seriellen Pins des Arduinos stecken. Anschließend kann der Arduino per USB an den Rechner angeschlossen werden und dient als Brücke zwischen USB und Display.
+Zu beachten ist, dass die Stromversorgung des Displays nicht direkt an den 5V Pin des Arduinos angeschlossen werden darf, da dieser nicht für einen so hohen Stromfluss ausgelegt ist.
+In der Packung des Nextion Displays liegt ein kleines Board bei, mit welchem man einen Mikro-USB Stecker mit Jumper-Kabeln verbinden kann. Dieses kann mit einem zweiten USB-Anschluss gleichzeitig zur Stromversorgung des Displays genutzt werden.
+Anschließend muss im Nextion Studio unter dem Menüpunkt „Upload“ die Baudrate des Displays gewählt werden. Diese beträgt Standardmäßig 9600 Baud, kann aber sowohl auf dem Display umgestellt werden als auch beim Upload automatisch ermittelt werden. Wenn der Upload gestartet wurde und alles richtig funktioniert wechselt das Display in den Upload-Modus und zeigt den Fortschritt an. Wenn der Upload abgeschlossen wurde erscheint die Startseite des Interfaces.
+
+
+Schritt 4: Die Programmierung des Microcontrollers
+Für die Programmierung des Microcontrollers kann die Arduino-IDE genutzt werden. Die Software für die Kasse muss folgende Aufgaben erfüllen:
+- Zuordnung der eindeutigen UIDs (Seriennummern) der RFID Chips zu den entsprechenden Modellen und CO2-Werten
+- Speichern der gescannten Objekte und Berechnung des Gesamtwertes.
+- Ansteuerung des Displays und Verarbeitung von Eingaben
+Um die UIDs der RFID Chips zu ermitteln kann ein einfaches Programm genutzt werden, welches die UID eines gescannten Chips über die serielle Schnittstelle ausgibt. 
+Die UIDs sollten daraufhin mit dem zugehörigen Modell in einer Textdatei notiert werden.
+Im beiliegenden Quelltext findet sich die Klasse „ScanObject“, welche eins der Modelle speichert, mit dem jeweiligen Text, einem Schlüssel, der UID und dem CO2 Wert. Diese werden statisch in einem Array initialisiert.
+In der loop-Routine wird durchgehend überprüft ob sich ein RFID Chip in der Reichweite des Sensors befindet. Ist dies der Fall wird die UID des Chips gelesen und das Array der ScanObjects durchlaufen. Ist ein Objekt mit der passenden ID gespeichert wird überprüft ob es sich schon in der Liste der gescannten Objekte befindet. Wenn dies nicht der Fall ist wird es in die Liste hinzugefügt und die Liste wird an das Display gesendet.
+Für die Kommunikation mit dem MFRC522 RFID Reader wurde die MFRC522 Bibliothek vom GitHub-User miguelbalboa verwendet. Diese kann auch über den Bibliotheksverwalter in der Arduino IDE installiert werden.
+Für die Ansteuerung des Displays gibt es eine Arduino Bibliothek, diese wurde hier nicht genutzt da  das Display relativ simple Befehle benutzt die auf der Nextion-Website gut dokumentiert sind. Möchte man zum Beispiel den Wert des Zahlenfeldes „meineZahl“ auf „5“ setzen sendet man einfach den String „meineZahl.val=5“ über die serielle Schnittstelle an das Display. Wenn auf dem Display eine Aktion ausgeführt wurde, zum Beispiel ein Knopfdruck, sendet dieses die ID der Aktion und einen Typ (zum Beispiel ob der Knopf gedrückt oder losgelassen wurde).
+
+
+
+
+
+
+
+
+
+
+
+
+
+Codebeispiel: Ermitteln und Ausgeben der UIDs der RFID Chips
+
+#include <SPI.h>
+#include <MFRC522.h>
+
+#define BUZZER D2
+#define SS_PIN D4
+#define RST_PIN D3
+MFRC522 mfrc522(SS_PIN, RST_PIN);
+
+void setup() {
+  Serial.begin(9600);
+  mfrc522.PCD_Init();   // Die API für den NFC-Reader wird initialisiert
+  mfrc522.PCD_SetAntennaGain(0x07<<4); //Setzt die Empfindlichkeit auf das Maximum
+}
+
+void loop() {
+  if (mfrc522.PICC_IsNewCardPresent() && mfrc522PICC_ReadCardSerial()) {
+    Serial.print("Chip gefunden: ");
+    for (byte i = 0; i < mfrc522.uid.size; i++) 
+    {
+       Serial.print(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " "));
+    }
+    Serial.println();
+  }
+}
+
+
+Schritt 5: Fertigstellung & Einsatz
+
+Am Schluss muss die Kasse zusammengesetzt werden. Zuerst wird der MFRC522 Reader montiert. Dabei werden an alle Pins Female auf Female Jumperkabel gesteckt. Diese werden dann von oben durch den Schlitz in der Deckelplatte nach innen geführt. Anschließend kann der RFID Reader mit Doppelklebeband oder einem kleinen Heißklebepunkt auf der Oberseite der Deckelplatte fixiert werden. 
+Nun können die Jumperkabel an den Microcontroller angeschlossen werden. Wenn ein Microcontroller-Board mit Buchsen als Anschluss genutzt wird (z.B. Arduino Uno), können die Kabel direkt angesteckt werden. Wenn das Board Pins als Anschluss besitzt, kann dieses zuvor auf ein Breadboard gesteckt werden (z.B. NodeMCU).
+Die Pinbelegung für den Anschluss des RFID Readers an den NodeMCU sieht wie folgt aus:
+SDA → D4
+SCK → D5
+MOSI → D7
+MISO → D6
+RST → D3
+GND → GND
+3.3V → 3.3V
+Für das typische Kassengeräusch kann ein einfacher Piezo-Buzzer verwendet werden. Dieser wurde wie folgt angeschlossen:
++ → D2
+- → GND
+Für die Stromversorgung wurde ein Micro-USB Kabel fest installiert. Dieses wird durch das untere Loch auf der Rückseite in das Gehäuse geführt und ist an das USB-Breakout-Board angeschlossen, welches der Packung des Nextion Displays beiliegt. Dieses führt die Spannung und die Masseleitung des USB-Kabels als zwei seperate Pinpaare heraus. An den ersten beiden Pins wird nun der Microcontroller angeschlossen (VIN und GND).
+Als letztes muss noch das Display angeschlossen werden. Die Kabel für die serielle Verbindung (TX,RX) werden entgegengesetzt an die RX- und TX-Pins des Microcontrollers angeschlossen. Für die Stromversorgung des Displays werden das VIN und das GND Kabel an die zweiten Pins des USB-Breakout-Boards angeschlossen.
+Die Kabel des Displays können durch das obere Loch auf der Rückseite des Gehäuses geführt werden.
+Die Komponenten können anschließend innerhalb des Gehäuses mit Heißkleber oder Klebeband fixiert werden. Nun ist das System einsatzbereit.
+Unterwegs - also zum Beispiel bei öffentlichen Infoständen - kann die Kasse auch mit einer Powerbank oder einer mobilen Solaranlage betrieben werden.
+In Zukunft wird die Klimakasse bei Infoständen der Greenpeace Gruppe Wuppertal zum Einsatz kommen.
