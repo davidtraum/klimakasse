@@ -14,7 +14,7 @@ Thema Verkehr:
 * Auto: https://www.thingiverse.com/thing:302706 (Skalierung für 3 Größen: 45%, 70%, 100%)
 * Kreuzfahrtschiff: https://www.thingiverse.com/thing:2641230
 * Bus: https://www.thingiverse.com/thing:1196748 (Skaliert auf ca. 325%)
-* Flugzeug: 
+* Flugzeug: https://www.thingiverse.com/thing:3121789 (Skaliert auf ca. 200%)
 
 Thema Wohnen:
 * Haus: https://www.thingiverse.com/thing:24379 (Skalierung für 3 Größen: 210%, 320%, 450%)
